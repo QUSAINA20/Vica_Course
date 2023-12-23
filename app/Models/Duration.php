@@ -8,6 +8,8 @@ use Illuminate\Database\Eloquent\Model;
 class Duration extends Model
 {
     use HasFactory;
+    protected $fillable = ['course_id', 'city_id', 'date_from', 'date_to'];
+
 
     public function course()
     {
