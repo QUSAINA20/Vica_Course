@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('durations', function (Blueprint $table) {
             $table->id();
             $table->foreignId('course_id')->constrained()->onDelete('cascade');
+            $table->foreignId('city_id')->constrained()->onDelete('cascade');
             $table->date('date_from');
             $table->date('date_to');
 

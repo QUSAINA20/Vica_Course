@@ -13,4 +13,9 @@ class City extends Model
     {
         return $this->belongsToMany(Course::class);
     }
+
+    public function durations()
+    {
+        return $this->hasMany(Duration::class);
+    }
 }

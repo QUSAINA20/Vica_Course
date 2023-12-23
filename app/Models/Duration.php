@@ -14,6 +14,12 @@ class Duration extends Model
         return $this->belongsTo(Course::class);
     }
 
+    public function city()
+    {
+        return $this->belongsTo(City::class);
+    }
+
+
     public function registers()
     {
         return $this->hasMany(Register::class);
