@@ -9,6 +9,9 @@ class Register extends Model
 {
     use HasFactory;
 
+    protected $fillable = ['first_name', 'last_name', 'phone', 'course_id', 'duration_id', 'email'];
+
+
     public function course()
     {
         return $this->belongsTo(Course::class);
