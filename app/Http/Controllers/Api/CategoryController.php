@@ -32,7 +32,7 @@ class CategoryController extends Controller
 
     public function show(Category $category)
     {
-
+        $category->load('courses.cities');
         // Check if there are courses
         if ($category->courses->isEmpty()) {
             return response()->json(['message' => 'No courses found for this category.'], 404);
