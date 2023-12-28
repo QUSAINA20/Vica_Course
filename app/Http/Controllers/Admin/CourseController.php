@@ -10,11 +10,32 @@ use Illuminate\Http\Request;
 
 class CourseController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $courses = Course::with('category', 'cities')->get();
-        return view('courses.index', compact('courses'));
+        $search = $request->input('search');
+        $categoryId = $request->input('category_id');
+        $cityId = $request->input('city_id');
+
+        $courses = Course::with(['category', 'cities'])
+            ->when($search, function ($query) use ($search) {
+                $query->where('title', 'like', '%' . $search . '%');
+            })
+            ->when($categoryId, function ($query) use ($categoryId) {
+                $query->where('category_id', $categoryId);
+            })
+            ->when($cityId, function ($query) use ($cityId) {
+                $query->whereHas('cities', function ($cityQuery) use ($cityId) {
+                    $cityQuery->where('city_id', $cityId);
+                });
+            })
+            ->get();
+
+        $categories = Category::all();
+        $cities = City::all();
+        return view('courses.index', compact('courses', 'categories', 'cities'));
     }
+
+
 
     public function create()
     {

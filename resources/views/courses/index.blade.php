@@ -4,6 +4,29 @@
     <div class="container">
         <h1 class="mb-4">Courses</h1>
 
+        <form action="{{ route('courses.index') }}" method="GET" class="mb-3">
+            <div class="input-group">
+                <input type="text" name="search" class="form-control" placeholder="Search by title...">
+
+                <!-- Category Dropdown -->
+                <select name="category_id" class="form-control">
+                    <option value="">Select Category</option>
+                    @foreach ($categories as $category)
+                        <option value="{{ $category->id }}">{{ $category->title }}</option>
+                    @endforeach
+                </select>
+
+                <select name="city_id" class="form-control">
+                    <option value="">Select City</option>
+                    @foreach ($cities as $city)
+                        <option value="{{ $city->id }}">{{ $city->name }}</option>
+                    @endforeach
+                </select>
+
+                <button type="submit" class="btn btn-primary">Search</button>
+            </div>
+        </form>
+
         <a href="{{ route('courses.create') }}" class="btn btn-primary mb-3">Create Course</a>
 
         <table class="table table-striped table-bordered">
