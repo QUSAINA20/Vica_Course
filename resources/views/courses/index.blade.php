@@ -35,6 +35,8 @@
                     <th>ID</th>
                     <th>Title</th>
                     <th>Category</th>
+                    <th>Teacher</th>
+                    <th>Duration</th>
                     <th>City</th>
                     <th>Price</th>
                     <th>Actions</th>
@@ -46,6 +48,8 @@
                         <td>{{ $course->id }}</td>
                         <td>{{ $course->title }}</td>
                         <td>{{ $course->category->title }}</td>
+                        <td>{{ $course->teacher->name }}</td>
+                        <td>{{ $course->duration->from }}/{{ $course->duration->to }}</td>
                         <td>{{ $course->cities()->first()->name }}</td>
                         <td>{{ $course->price }} {{ $course->currency }}</td>
                         <td>

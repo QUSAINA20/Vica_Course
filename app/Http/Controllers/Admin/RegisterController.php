@@ -10,7 +10,7 @@ class RegisterController extends Controller
 {
     public function index()
     {
-        $registers = Register::with('course', 'duration')->get();
+        $registers = Register::with('course', 'city')->get();
         return view('registers.index', compact('registers'));
     }
 

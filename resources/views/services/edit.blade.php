@@ -33,8 +33,8 @@
             <label for="image">Image:</label>
             <input type="file" class="form-control-file" id="image" name="image" accept="image/*">
             @if (isset($service) && $service->image)
-                <img src="{{ asset($service->image) }}" alt="{{ $service->title }}" class="mt-2 img-thumbnail"
-                    style="max-width: 200px;">
+                <img src="{{ asset('storage/service_images/' . basename($service->image)) }}" alt="{{ $service->title }}"
+                    class="mt-2 img-thumbnail" style="max-width: 200px;">
             @endif
         </div>
         <button type="submit" class="btn btn-primary">{{ isset($service) ? 'Update' : 'Create' }}</button>

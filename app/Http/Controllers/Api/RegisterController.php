@@ -18,7 +18,7 @@ class RegisterController extends Controller
             'email' => 'required|email',
             'phone' => 'required|regex:/^([0-9\s\-\+\(\)]*)$/|max:50|min:9',
             'course_id' => 'required|exists:courses,id',
-            'duration_id' => 'required|exists:durations,id',
+            'city_id' => 'required|exists:cities,id',
         ]);
 
         // Create a new registration

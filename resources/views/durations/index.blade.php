@@ -9,20 +9,18 @@
         <table class="table">
             <thead>
                 <tr>
-                    <th>Course</th>
-                    <th>City</th>
-                    <th>Date From</th>
-                    <th>Date To</th>
+                    <th>Title</th>
+                    <th> From</th>
+                    <th> To</th>
                     <th>Actions</th>
                 </tr>
             </thead>
             <tbody>
                 @foreach ($durations as $duration)
                     <tr>
-                        <td>{{ $duration->course->title }}</td>
-                        <td>{{ $duration->city->name }}</td>
-                        <td>{{ $duration->date_from }}</td>
-                        <td>{{ $duration->date_to }}</td>
+                        <td>{{ $duration->title }}</td>
+                        <td>{{ $duration->from }}</td>
+                        <td>{{ $duration->to }}</td>
                         <td>
                             <a href="{{ route('durations.edit', $duration->id) }}" class="btn btn-primary btn-sm">Edit</a>
                             <form action="{{ route('durations.destroy', $duration->id) }}" method="POST"

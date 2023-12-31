@@ -9,7 +9,7 @@ class Register extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['first_name', 'last_name', 'phone', 'course_id', 'duration_id', 'email'];
+    protected $fillable = ['first_name', 'last_name', 'phone', 'course_id', 'city_id', 'email'];
 
 
     public function course()
@@ -17,8 +17,8 @@ class Register extends Model
         return $this->belongsTo(Course::class);
     }
 
-    public function duration()
+    public function city()
     {
-        return $this->belongsTo(Duration::class);
+        return $this->belongsTo(city::class);
     }
 }

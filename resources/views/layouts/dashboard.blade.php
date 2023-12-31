@@ -140,95 +140,102 @@
                 </li>
             </ul>
         </nav>
-        @auth
 
 
-            <!-- Main Sidebar Container -->
-            <aside class="main-sidebar sidebar-dark-primary elevation-4">
-                <!-- Sidebar -->
-                <div class="sidebar">
-                    <!-- Sidebar user panel (optional) -->
-                    <div class="user-panel mt-3 pb-3 mb-3 d-flex">
-                        <div class="image">
-                            <img src="https://adminlte.io/themes/v3/dist/img/user2-160x160.jpg"
-                                class="img-circle elevation-2" alt="User Image">
-                        </div>
-                        <div class="info">
-                            <a href="#" class="d-block">{{ auth()->user()->name }}</a>
-                        </div>
+
+        <!-- Main Sidebar Container -->
+        <aside class="main-sidebar sidebar-dark-primary elevation-4">
+            <!-- Sidebar -->
+            <div class="sidebar">
+                <!-- Sidebar user panel (optional) -->
+                <div class="user-panel mt-3 pb-3 mb-3 d-flex">
+                    <div class="image">
+                        <img src="{{ asset('storage/user_images/' . basename(auth()->user()->image)) }}"
+                            class="img-circle elevation-2" alt="User Image">
                     </div>
-
-                    <!-- Sidebar Menu -->
-                    <nav class="mt-2">
-                        <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu"
-                            data-accordion="false">
-
-                            <li class="nav-item">
-                                <a href="{{ route('services.index') }}" class="nav-link">
-                                    <i class="nav-icon fas fa-th-list"></i>
-                                    <p>Service</p>
-                                </a>
-                            </li>
-
-                            <!-- Categories -->
-                            <li class="nav-item">
-                                <a href="{{ route('categories.index') }}" class="nav-link">
-                                    <i class="nav-icon fas fa-th-list"></i>
-                                    <p>Categories</p>
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a href="{{ route('cities.index') }}" class="nav-link">
-                                    <i class="nav-icon fas fa-th-list"></i>
-                                    <p>Cities</p>
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a href="{{ route('courses.index') }}" class="nav-link">
-                                    <i class="nav-icon fas fa-th-list"></i>
-                                    <p>Course</p>
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a href="{{ route('durations.index') }}" class="nav-link">
-                                    <i class="nav-icon fas fa-th-list"></i>
-                                    <p>Duration</p>
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a href="{{ route('registers.index') }}" class="nav-link">
-                                    <i class="nav-icon fas fa-th-list"></i>
-                                    <p>Register</p>
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a href="{{ route('settings.name.email') }}" class="nav-link">
-                                    <i class="nav-icon fas fa-th-list"></i>
-                                    <p>Change Email and Name</p>
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a href="{{ route('settings.password') }}" class="nav-link">
-                                    <i class="nav-icon fas fa-th-list"></i>
-                                    <p>Change Password</p>
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a href="{{ route('logout') }}" class="nav-link">
-                                    <i class="nav-icon fas fa-users"></i>
-                                    <p>Logout</p>
-                                </a>
-                            </li>
-
-                            <!-- Add more sidebar links as needed -->
-
-                        </ul>
-                    </nav>
-                    <!-- /.sidebar-menu -->
+                    <div class="info">
+                        <a href="#" class="d-block">{{ auth()->user()->name }}</a>
+                    </div>
                 </div>
-                <!-- /.sidebar -->
-            </aside>
-        @endauth
+
+                <!-- Sidebar Menu -->
+                <nav class="mt-2">
+                    <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu"
+                        data-accordion="false">
+
+                        <li class="nav-item">
+                            <a href="{{ route('services.index') }}" class="nav-link">
+                                <i class="nav-icon fas fa-th-list"></i>
+                                <p>Service</p>
+                            </a>
+                        </li>
+
+                        <!-- Categories -->
+                        <li class="nav-item">
+                            <a href="{{ route('categories.index') }}" class="nav-link">
+                                <i class="nav-icon fas fa-th-list"></i>
+                                <p>Categories</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{{ route('teachers.index') }}" class="nav-link">
+                                <i class="nav-icon fas fa-th-list"></i>
+                                <p>Teachers</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{{ route('cities.index') }}" class="nav-link">
+                                <i class="nav-icon fas fa-th-list"></i>
+                                <p>Cities</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{{ route('durations.index') }}" class="nav-link">
+                                <i class="nav-icon fas fa-th-list"></i>
+                                <p>Duration</p>
+                            </a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a href="{{ route('courses.index') }}" class="nav-link">
+                                <i class="nav-icon fas fa-th-list"></i>
+                                <p>Course</p>
+                            </a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a href="{{ route('registers.index') }}" class="nav-link">
+                                <i class="nav-icon fas fa-th-list"></i>
+                                <p>Register</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{{ route('settings.info') }}" class="nav-link">
+                                <i class="nav-icon fas fa-th-list"></i>
+                                <p>Change Info</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{{ route('settings.password') }}" class="nav-link">
+                                <i class="nav-icon fas fa-th-list"></i>
+                                <p>Change Password</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{{ route('logout') }}" class="nav-link">
+                                <i class="nav-icon fas fa-users"></i>
+                                <p>Logout</p>
+                            </a>
+                        </li>
+
+                        <!-- Add more sidebar links as needed -->
+
+                    </ul>
+                </nav>
+                <!-- /.sidebar-menu -->
+            </div>
+            <!-- /.sidebar -->
+        </aside>
 
         <!-- Content Wrapper. Contains page content -->
         <div class="content-wrapper">

@@ -15,8 +15,8 @@ class City extends Model
         return $this->belongsToMany(Course::class);
     }
 
-    public function durations()
+    public function registers()
     {
-        return $this->hasMany(Duration::class);
+        return $this->hasMany(Register::class);
     }
 }

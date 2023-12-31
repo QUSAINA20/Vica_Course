@@ -12,7 +12,7 @@ class DurationController extends Controller
 {
     public function index()
     {
-        $durations = Duration::with('course', 'city')->get();
+        $durations = Duration::all();
         return view('durations.index', compact('durations'));
     }
 
@@ -26,10 +26,10 @@ class DurationController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'course_id' => 'required',
-            'city_id' => 'required',
-            'date_from' => 'required|date',
-            'date_to' => 'required|date|after_or_equal:date_from',
+            'title' => 'required|string|max:255',
+
+            'from' => 'required|date_format:H:i',
+            'to' => 'required|date_format:H:i|after_or_equal:from',
         ]);
 
         Duration::create($request->all());
@@ -52,15 +52,14 @@ class DurationController extends Controller
     public function update(Request $request, Duration $duration)
     {
         $request->validate([
-            'course_id' => 'required',
-            'city_id' => 'required',
-            'date_from' => 'required|date',
-            'date_to' => 'required|date|after_or_equal:date_from',
+            'title' => 'required|string|max:255',
+            'from' => 'required|date_format:H:i',
+            'to' => 'required|date_format:H:i|after_or_equal:from',
         ]);
 
         $duration->update($request->all());
 
-        return redirect()->route('durations.show', $duration->id)->with('success', 'Duration updated successfully');
+        return redirect()->route('durations.index', $duration->id)->with('success', 'Duration updated successfully');
     }
 
     public function destroy(Duration $duration)

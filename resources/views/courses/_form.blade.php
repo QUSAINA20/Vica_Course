@@ -77,5 +77,38 @@
         <div class="text-danger">{{ $message }}</div>
     @enderror
 </div>
+<div class="mb-3">
+    <label for="teacher_id" class="form-label">Teacher:</label>
+    <select name="teacher_id" id="teacher_id" class="form-select" required>
+        @foreach ($teachers as $teacher)
+            <option value="{{ $teacher->id }}"
+                @isset($course)
+                {{ old('teacher_id', $course->teacher_id ?? '') == $teacher->id ? 'selected' : '' }}
+                @endisset>
+                {{ $teacher->name }}
+            </option>
+        @endforeach
+    </select>
+    @error('teacher_id')
+        <div class="text-danger">{{ $message }}</div>
+    @enderror
+</div>
+
+<div class="mb-3">
+    <label for="duration_id" class="form-label">Duration:</label>
+    <select name="duration_id" id="duration_id" class="form-select" required>
+        @foreach ($durations as $duration)
+            <option value="{{ $duration->id }}"
+                @isset($course)
+                {{ old('duration_id', $course->duration_id ?? '') == $duration->id ? 'selected' : '' }}
+                @endisset>
+                {{ $duration->from }}/{{ $duration->to }}
+            </option>
+        @endforeach
+    </select>
+    @error('teacher_id')
+        <div class="text-danger">{{ $message }}</div>
+    @enderror
+</div>
 
 <button type="submit" class="btn btn-primary">{{ $submitButtonText }}</button>

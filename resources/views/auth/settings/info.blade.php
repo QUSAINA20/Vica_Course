@@ -5,7 +5,7 @@
         <div class="row justify-content-center">
             <div class="col-md-8">
                 <div class="card">
-                    <div class="card-header">{{ __('Update Name and Email') }}</div>
+                    <div class="card-header">{{ __('Update Info') }}</div>
 
                     <div class="card-body">
                         @if (session('success'))
@@ -14,7 +14,7 @@
                             </div>
                         @endif
 
-                        <form method="POST" action="{{ route('update.name.email') }}">
+                        <form method="POST" action="{{ route('update.info') }}" enctype="multipart/form-data">
                             @csrf
                             @method('PUT')
 
@@ -25,6 +25,18 @@
                                     value="{{ auth()->user()->name }}" required autofocus>
 
                                 @error('name')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
+                            <div class="form-group">
+                                <label for="user_name">{{ __('User Name') }}</label>
+                                <input id="user_name" type="text"
+                                    class="form-control @error('user_name') is-invalid @enderror" name="user_name"
+                                    value="{{ auth()->user()->user_name }}" required autofocus>
+
+                                @error('user_name')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>
@@ -42,6 +54,17 @@
                                         <strong>{{ $message }}</strong>
                                     </span>
                                 @enderror
+                            </div>
+
+                            <div class="form-group">
+                                <label for="image">Image:</label>
+                                <input type="file" class="form-control-file" id="image" name="image"
+                                    accept="image/*">
+                                @if (auth()->user() && auth()->user()->image)
+                                    <img src="{{ asset('storage/user_images/' . basename(auth()->user()->image)) }}"
+                                        alt="{{ auth()->user()->name }}" class="img-thumbnail mb-2"
+                                        style="max-width: 200px;">
+                                @endif
                             </div>
 
                             <div class="form-group">

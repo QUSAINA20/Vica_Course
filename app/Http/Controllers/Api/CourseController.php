@@ -10,8 +10,8 @@ class CourseController extends Controller
 {
     public function show(Course $course)
     {
-        // Load the 'durations' relationship with 'city' for the course
-        $course->load('durations.city');
+
+        $course->load(['duration', 'cities']);
 
         // Check if the course exists
         if (!$course) {
@@ -26,15 +26,13 @@ class CourseController extends Controller
             'image_url' => $course->image_url,
             'price' => $course->price,
             'currency' => $course->currency,
-            'durations' => $course->durations->map(function ($duration) {
+            'teacher' => $course->teacher->name,
+            'from' => $course->duration->from,
+            'to' => $course->duration->to,
+            'cities' => $course->cities->map(function ($city) {
                 return [
-                    'id' => $duration->id,
-                    'date_from' => $duration->date_from,
-                    'date_to' => $duration->date_to,
-                    'city' => [
-                        'id' => $duration->city->id,
-                        'name' => $duration->city->name,
-                    ],
+                    'id' => $city->id,
+                    'name' => $city->name,
                 ];
             }),
         ];

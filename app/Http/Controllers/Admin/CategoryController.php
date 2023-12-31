@@ -59,7 +59,7 @@ class CategoryController extends Controller
         ]);
 
         if ($request->hasFile('image')) {
-            $imagePath = $request->file('image')->store('category_images');
+            $imagePath = $request->file('image')->store('public/category_images');
             $category->update(['image' => $imagePath]);
         }
 

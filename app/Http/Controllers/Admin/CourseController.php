@@ -6,6 +6,8 @@ use App\Http\Controllers\Controller;
 use App\Models\Category;
 use App\Models\City;
 use App\Models\Course;
+use App\Models\Duration;
+use App\Models\Teacher;
 use Illuminate\Http\Request;
 
 class CourseController extends Controller
@@ -16,7 +18,7 @@ class CourseController extends Controller
         $categoryId = $request->input('category_id');
         $cityId = $request->input('city_id');
 
-        $courses = Course::with(['category', 'cities'])
+        $courses = Course::with(['category', 'cities', 'teacher', 'duration'])
             ->when($search, function ($query) use ($search) {
                 $query->where('title', 'like', '%' . $search . '%');
             })
@@ -41,13 +43,18 @@ class CourseController extends Controller
     {
         $categories = Category::all();
         $cities = City::all();
-        return view('courses.create', compact('categories', 'cities'));
+        $teachers = Teacher::all();
+        $durations = Duration::all();
+
+        return view('courses.create', compact('categories', 'cities', 'teachers', 'durations'));
     }
 
     public function store(Request $request)
     {
-        $request->validate([
+        $validatedData = $request->validate([
             'category_id' => 'required|exists:categories,id',
+            'duration_id' => 'required|exists:durations,id',
+            'teacher_id' => 'required|exists:teachers,id',
             'title' => 'required|max:255|unique:courses',
             'description' => 'required',
             'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
@@ -61,6 +68,8 @@ class CourseController extends Controller
 
         $course = Course::create([
             'category_id' => $request->input('category_id'),
+            'teacher_id' => $request->input('teacher_id'),
+            'duration_id' => $request->input('duration_id'),
             'title' => $request->input('title'),
             'description' => $request->input('description'),
             'image' => $imagePath,
@@ -68,7 +77,7 @@ class CourseController extends Controller
             'currency' => $request->input('currency'),
         ]);
 
-        $course->cities()->sync($request->input('cities'));
+        $course->cities()->attach($request->input('cities'));
 
         return redirect()->route('courses.index')->with('success', 'Course created successfully!');
     }
@@ -82,13 +91,17 @@ class CourseController extends Controller
     {
         $categories = Category::all();
         $cities = City::all();
-        return view('courses.edit', compact('course', 'categories', 'cities'));
+        $teachers = Teacher::all();
+        $durations = Duration::all();
+        return view('courses.edit', compact('course', 'categories', 'cities', 'teachers', 'durations'));
     }
 
     public function update(Request $request, Course $course)
     {
         $request->validate([
             'category_id' => 'required|exists:categories,id',
+            'duration_id' => 'required|exists:durations,id',
+            'teacher_id' => 'required|exists:teachers,id',
             'title' => 'required|max:255',
             'description' => 'required',
             'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
@@ -105,6 +118,8 @@ class CourseController extends Controller
         // Update other fields as needed
         $course->update([
             'category_id' => $request->input('category_id'),
+            'teacher_id' => $request->input('teacher_id'),
+            'duration_id' => $request->input('duration_id'),
             'title' => $request->input('title'),
             'description' => $request->input('description'),
             'price' => $request->input('price'),

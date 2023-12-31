@@ -6,6 +6,7 @@ use App\Http\Controllers\Admin\CourseController;
 use App\Http\Controllers\Admin\DurationController;
 use App\Http\Controllers\Admin\RegisterController;
 use App\Http\Controllers\Admin\ServiceController;
+use App\Http\Controllers\Admin\TeacherController;
 use App\Http\Controllers\AuthController;
 use Illuminate\Support\Facades\Route;
 
@@ -26,13 +27,14 @@ Route::get('/', function () {
 Route::middleware(['auth'])->group(function () {
     Route::resource('services', ServiceController::class);
     Route::resource('categories', CategoryController::class);
+    Route::resource('teachers', TeacherController::class);
     Route::resource('cities', CityController::class);
     Route::resource('courses', CourseController::class);
     Route::resource('durations', DurationController::class);
     Route::resource('registers', RegisterController::class)->only('index', 'destroy');
 
-    Route::get('/settings/name-email', [AuthController::class, 'showChangeNameEmailForm'])->name('settings.name.email');
-    Route::put('/settings/name-email', [AuthController::class, 'updateNameEmail'])->name('update.name.email');
+    Route::get('/settings/name-email', [AuthController::class, 'showChangeInfoForm'])->name('settings.info');
+    Route::put('/settings/name-email', [AuthController::class, 'updateInfo'])->name('update.info');
 
     Route::get('/settings/password', [AuthController::class, 'showChangePasswordForm'])->name('settings.password');
     Route::put('/settings/password', [AuthController::class, 'updatePassword'])->name('update.password');

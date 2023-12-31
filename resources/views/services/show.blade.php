@@ -12,7 +12,7 @@
 
 
 
-            <a href="{{ route('categories.edit', $service->id) }}" class="btn btn-primary">Edit</a>
+            <a href="{{ route('services.edit', $service->id) }}" class="btn btn-primary">Edit</a>
             <!-- Add a delete form here if you want to implement delete action -->
         </div>
     </div>

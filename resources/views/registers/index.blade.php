@@ -15,6 +15,7 @@
                     <th>Email</th>
                     <th>Phone</th>
                     <th>Course</th>
+                    <th>Duration</th>
                     <th>City</th>
                     <th>Actions</th>
                 </tr>
@@ -28,7 +29,8 @@
                         <td>{{ $register->email }}</td>
                         <td>{{ $register->phone }}</td>
                         <td>{{ $register->course->title }}</td>
-                        <td>{{ $register->duration->city->name }}</td>
+                        <td>{{ $register->course->duration->from }}/{{ $register->course->duration->to }}</td>
+                        <td>{{ $register->city->name }}</td>
 
                         <td>
                             <form action="{{ route('registers.destroy', $register->id) }}" method="POST"

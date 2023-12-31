@@ -59,7 +59,7 @@ class ServiceController extends Controller
         ]);
 
         if ($request->hasFile('image')) {
-            $imagePath = $request->file('image')->store('service_images');
+            $imagePath = $request->file('image')->store('public/service_images');
             $service->update(['image' => $imagePath]);
         }
 

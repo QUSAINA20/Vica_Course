@@ -30,25 +30,33 @@ class AuthController extends Controller
     }
 
     // Show the form to change the user's name and email
-    public function showChangeNameEmailForm()
+    public function showChangeInfoForm()
     {
-        return view('auth.settings.name_email');
+        return view('auth.settings.info');
     }
 
     // Update the user's name and email
-    public function updateNameEmail(Request $request)
+    public function updateInfo(Request $request)
     {
         $this->validate($request, [
             'name' => 'required|string|max:255',
+            'user_name' => 'required|string|max:255',
             'email' => 'required|email|unique:users,email,' . auth()->id(),
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+
         ]);
 
         auth()->user()->update([
             'name' => $request->input('name'),
+            'user_name' => $request->input('user_name'),
             'email' => $request->input('email'),
         ]);
+        if ($request->hasFile('image')) {
+            $imagePath = $request->file('image')->store('public/user_images');
+            auth()->user()->update(['image' => $imagePath]);
+        }
 
-        return redirect()->back()->with('success', 'Name and email updated successfully.');
+        return redirect()->back()->with('success', 'Info updated successfully.');
     }
 
     // Show the form to change the user's password

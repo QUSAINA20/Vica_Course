@@ -5,19 +5,13 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Duration extends Model
+class Teacher extends Model
 {
     use HasFactory;
-    protected $fillable = ['from', 'to', 'title'];
-
+    protected $fillable = ['name', 'image'];
 
     public function courses()
     {
         return $this->hasMany(Course::class);
-    }
-
-    public function registers()
-    {
-        return $this->hasMany(Register::class);
     }
 }

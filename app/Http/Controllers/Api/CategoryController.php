@@ -54,6 +54,9 @@ class CategoryController extends Controller
                     'image_url' => $course->image_url,
                     'price' => $course->price,
                     'currency' => $course->currency,
+                    'teacher' => $course->teacher->name,
+                    'from' => $course->duration->from,
+                    'to' => $course->duration->to,
                     'cities' => $course->cities->map(function ($city) {
                         return [
                             'id' => $city->id,
