@@ -76,4 +76,36 @@ class ServiceController extends Controller
         $service->delete();
         return redirect()->route('services.index')->with('success', 'Service deleted successfully!');
     }
+
+    public function trash()
+    {
+
+        $trashedServices = Service::onlyTrashed()->get();
+
+        return view('services.trash', compact('trashedServices'));
+    }
+
+    public function forceDelete($id)
+    {
+        $service = Service::withTrashed()->find($id);
+
+        if ($service) {
+            $service->forceDelete();
+            return redirect()->route('services.index')->with('success', 'Service permanently deleted successfully.');
+        }
+
+        return redirect()->route('services.index')->with('error', 'Service not found.');
+    }
+
+    public function restore($id)
+    {
+        $service = Service::withTrashed()->find($id);
+
+        if ($service) {
+            $service->restore();
+            return redirect()->route('services.index')->with('success', 'Service restored successfully.');
+        }
+
+        return redirect()->route('services.index')->with('error', 'Service not found.');
+    }
 }

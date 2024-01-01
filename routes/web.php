@@ -26,12 +26,16 @@ Route::get('/', function () {
 });
 Route::middleware(['auth'])->group(function () {
     Route::resource('services', ServiceController::class);
+    Route::get('service/trash', [ServiceController::class, 'trash'])->name('services.trash');
+    Route::delete('services/{id}/force-delete', [ServiceController::class, 'forceDelete'])->name('services.force-delete');
+    Route::patch('services/{id}/restore', [ServiceController::class, 'restore'])->name('services.restore');
     Route::resource('categories', CategoryController::class);
     Route::resource('teachers', TeacherController::class);
     Route::resource('cities', CityController::class);
     Route::resource('courses', CourseController::class);
     Route::resource('durations', DurationController::class);
     Route::resource('registers', RegisterController::class)->only('index', 'destroy');
+
 
     Route::get('/settings/name-email', [AuthController::class, 'showChangeInfoForm'])->name('settings.info');
     Route::put('/settings/name-email', [AuthController::class, 'updateInfo'])->name('update.info');
